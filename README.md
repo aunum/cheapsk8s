@@ -7,7 +7,7 @@ Cheap Kuberernetes compute
 Cheapsk8s hunts through cloud providers to find the cheapest compute for your workload. 
 
 ### Find compute based on resource requests
-```sh
+```
 $ cks find --cpu 2 --mem 50kb --storage 100gi
 
 select option:
@@ -64,7 +64,7 @@ aws-1     aws          $0.10/hr
 gce-5     gce          $0.12/hr
 ```
 Switch kubeconfigs
-```sh
+```
 $ cks switch
 
 select compute:

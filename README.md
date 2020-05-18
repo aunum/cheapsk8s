@@ -54,6 +54,8 @@ spec:
 ```
 ```
 $ cks experiment -f my-experiment1.yaml
+
+running job in 6 different environments...
 ```
 
 ### Manage compute

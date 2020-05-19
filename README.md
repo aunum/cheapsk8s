@@ -12,9 +12,9 @@ $ cks find --cpu 2 --mem 50kb --storage 100gi
 
 select option:
 
-a. aws ec2 spot instance -- single node cluster (us-west-2) -- $0.10/hr
-b. gce preemptible vm -- single node cluster (us-central1) -- $0.12/hr
-c. azure spot instance -- single node cluster (west-us) -- $0.09/hr
+  aws ec2 spot instance -- single node cluster (us-west-2) -- $0.10/hr
+> gce preemptible vm -- single node cluster (us-central1) -- $0.12/hr
+  azure spot instance -- single node cluster (west-us) -- $0.09/hr
 
 ```
 You can also find based on the set requests and limits in your k8s deployment configurations.
@@ -47,18 +47,37 @@ spec:
       spec:
         containers:
         - name: pi
-          image: perl
-          command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          image: pytorch
+          command: ["python", "classifier_test.py"]
         restartPolicy: Never
     backoffLimit: 4
 ```
+Create the experiment
 ```
 $ cks experiment -f my-experiment1.yaml
 
 running job in 6 different environments...
 ```
+Retrieve the outcomes
+```
+$ cks experiment status my-experiment1 -o yaml
 
+status:
+  provider:
+    aws:
+      "us-west-2/m4-large":
+        cost: $2.40
+        time: 400s
+      "us-west-1/t2-small":
+        cost: $1.40
+        time: 700s
+    gce:
+      "us-central1/ec2":
+        cost: $2.39
+        time: 400s
+```
 ### Manage compute
+List current clusters
 ```sh
 $ cks compute view
 NAME      PROVIDER     COST
@@ -71,6 +90,6 @@ $ cks switch
 
 select compute:
 
-a. aws-1
-b. gce-5
+> aws-1
+  gce-5
 ```

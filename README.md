@@ -1,4 +1,4 @@
-# Cheapsk8s
+# cheapsk8s
 
 Cheap Kuberernetes compute
 
